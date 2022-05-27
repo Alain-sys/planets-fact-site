@@ -12,7 +12,7 @@ const Footer = (props) => {
 
   const rows = test.map((features, index) => {
     return (
-      <div className="footer_items" key={index}>
+      <div className="footer__items" key={index}>
         <p>{features.text}</p>
         <p>{features.value}</p>
       </div>
