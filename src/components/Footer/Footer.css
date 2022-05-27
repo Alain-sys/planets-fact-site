@@ -4,3 +4,7 @@ footer {
   margin: auto;
   justify-content: space-between;
 }
+
+.footer__items {
+  border: 1px solid;
+}
