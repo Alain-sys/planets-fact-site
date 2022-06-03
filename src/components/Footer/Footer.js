@@ -1,20 +1,20 @@
 import './Footer.css';
 
 const Footer = (props) => {
-  console.log(props);
   const footerContent = props.dataJson;
-  const test = [
+  const features = [
     { text: 'rotation time', value: `${footerContent.rotation}` },
     { text: 'revolution time', value: `${footerContent.revolution}` },
     { text: 'radius', value: `${footerContent.radius}` },
     { text: 'average temp.', value: `${footerContent.temperature}` },
   ];
 
-  const rows = test.map((features, index) => {
+  // create elements for each object in the features array
+  const rows = features.map((features, index) => {
     return (
-      <div className="footer__items" key={index}>
-        <p>{features.text}</p>
-        <p>{features.value}</p>
+      <div className="features" key={index}>
+        <p className="features__text">{features.text}</p>
+        <p className={`features__value features__value-${footerContent.name.toLowerCase()}`}>{features.value}</p>
       </div>
     );
   });

@@ -15,9 +15,13 @@ class App extends Component {
 
   // update the state for contain the data with the good index which was send by the header component
   handleChangePlanets = (index) => {
-    this.setState({
-      currentPlanet: data[index],
-    });
+    if (this.state.currentPlanet !== data[index]) {
+      this.setState({
+        currentPlanet: data[index],
+      });
+    } else {
+      return;
+    }
   };
 
   render() {

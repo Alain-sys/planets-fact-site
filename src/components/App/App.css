@@ -9,23 +9,35 @@
 :root {
   --ff-spartan: 'Spartan', sans-serif;
   --ff-antonio: 'Antonio', sans-serif;
+
   --tt-title: uppercase;
-  --fs-title-antonio: 5rem;
-  --fs-subtitle-anotonio: 2.5rem;
-  --fs-title-spartan: 0.75rem;
-  --fs-subtitle-spartan: 0.6875rem;
-  --fs-text: 0.875rem;
-  --fw-title-subtitle-antonio: 400;
-  --fw-title-subtitle-spartan: 700;
-  --fw-text: 400;
-  --lh-title-antonio: 6.4375rem;
-  --lh-subtitle-antonio: 3.25rem;
-  --lh-title-subtitle-spartan: 1.5625rem;
-  --lh-buttons: 1.5625rem;
-  --lh-text: 1.5625rem;
-  --ls-subtitle-antonio: -0.09375rem;
-  --ls-title-spartan: 0.1625rem;
-  --ls-subtitle-spartan: 0.0625rem;
+
+  --fs-header-title: 2.5rem;
+  --fs-header-nav: 0.6875rem;
+  --fs-main-title: 5rem;
+  --fs-main-buttons: 0.75rem;
+  --fs-main-text: 0.875rem;
+  --fs-footer-text: 0.6875rem;
+  --fs-footer-value: 2.5rem;
+
+  --fw-antonio: 400;
+  --fw-spartan: 700;
+  --fw-main-title-text: 400;
+
+  --lh-header-title: 3.25rem;
+  --lh-header-nav-main-link: 1.5625rem;
+  --lh-main-title: 6.4375rem;
+  --lh-main-text: 1.5625rem;
+  --lh-main-buttons: 1.5625rem;
+  --lh-footer-text: 1rem;
+  --lh-footer-value: 3.235rem;
+
+  --ls-header-title: -0.09375rem;
+  --ls-header-nav: 0.0625rem;
+  --ls-main-buttons: 0.1625rem;
+  --ls-footer-text: 0.045rem;
+  --ls-footer-value: -0.09375rem;
+
   --bg-mercury: hsla(194, 48%, 50%, 1);
   --bg-venus: hsla(33, 82%, 61%, 1);
   --bg-earth: hsla(263, 66%, 51%, 1);
@@ -47,28 +59,39 @@ body button {
   color: #ffffff;
 }
 
+@media (width < 70em) {
+  :root {
+    --fs-footer-text: 0.5rem;
+    --fs-footer-value: 1.5rem;
+    --lh-footer-text: 1rem;
+    --lh-footer-value: 1.93rem;
+    --ls-footer-text: 0.045rem;
+    --ls-footer-value: -0.05rem;
+  }
+}
+
 @media (width <= 48em) {
   :root {
-    --fs-title-antonio: 3rem;
-    --fs-text: 0.6875rem;
-    --fs-title-spartan: 0.5625rem;
-    --lh-title-antonio: 3.875rem;
+    --fs-main-title: 3rem;
+    --fs-main-text: 0.6875rem;
+    --fs-main-buttons: 0.5625rem;
+    --lh-main-title: 3.875rem;
     --lh-text: 1.375rem;
-    --ls-title-spartan: 0.12rem;
+    --ls-main-buttons: 0.12rem;
   }
 }
 
 @media (width < 48em) {
   :root {
-    --fs-subtitle-spartan: 0.9875rem;
-    --ls-subtitle-spartan: 0.085rem;
+    --fs-header-nav: 0.9875rem;
+    --ls-header-nav: 0.085rem;
   }
 }
 
 @media (width < 25em) {
   :root {
-    --fs-title-antonio: 2.5rem;
-    --lh-title-antonio: 3.235rem;
-    --lh-buttons: 0.625rem;
+    --fs-main-title: 2.5rem;
+    --lh-main-title: 3.235rem;
+    --lh-main-buttons: 0.625rem;
   }
 }

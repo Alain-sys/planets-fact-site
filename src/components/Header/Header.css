@@ -8,11 +8,11 @@ header {
 
 .logo {
   font-family: var(--ff-antonio);
-  font-size: var(--fs-subtitle-anotonio);
+  font-size: var(--fs-header-title);
   text-transform: var(--tt-title);
-  line-height: var(--lh-subtitle-antonio);
-  letter-spacing: var(--ls-subtitle-antonio);
-  font-weight: var(--fw-title-subtitle-antonio);
+  line-height: var(--lh-header-title);
+  letter-spacing: var(--ls-header-title);
+  font-weight: var(--fw-antonio);
 }
 
 .menu {
@@ -26,11 +26,11 @@ header {
   border: none;
   background-color: transparent;
   opacity: 0.75;
-  font-size: var(--fs-subtitle-spartan);
-  letter-spacing: var(--ls-subtitle-spartan);
-  line-height: var(--lh-title-subtitle-spartan);
-  font-weight: var(--fw-title-subtitle-spartan);
-  text-transform: uppercase;
+  font-size: var(--fs-header-nav);
+  letter-spacing: var(--ls-header-nav);
+  line-height: var(--lh-header-nav-main-link);
+  font-weight: var(--fw-spartan);
+  text-transform: var(--tt-title);
   cursor: pointer;
 }
 
@@ -66,10 +66,6 @@ header {
   display: none;
 }
 
-.hamburger {
-  display: none;
-}
-
 .menu__items-mercury::before {
   background: var(--bg-mercury);
 }
@@ -102,10 +98,15 @@ header {
   background: var(--bg-neptune);
 }
 
+.hamburger {
+  display: none;
+}
+
 /*****Tablet*****/
 @media (48em <= width <= 70em) {
   header {
     flex-direction: column;
+    padding: 0;
   }
 
   .logo {
@@ -113,7 +114,7 @@ header {
   }
 
   .menu {
-    width: 100%;
+    width: 90%;
     justify-content: space-between;
   }
 
@@ -123,7 +124,7 @@ header {
 
   .menu__items::before {
     top: auto;
-    bottom: 0%;
+    bottom: 0;
   }
 }
 
@@ -134,19 +135,19 @@ header {
   }
 
   header {
-    padding: 1rem 24px;
     max-height: 85px;
+    padding: 1rem 24px;
   }
 
   .menu {
     position: absolute;
-    flex-direction: column;
     height: 100%;
+    flex-direction: column;
     top: 85px;
-    left: 0%;
-    right: 0%;
-    gap: 0;
+    left: 0;
+    right: 0;
     padding: 0 28px;
+    gap: 0;
     background: hsla(240, 67%, 8%, 1);
     transform: translateX(-150%);
     transition: 0.5s ease;
@@ -168,9 +169,9 @@ header {
 
   .menu__items::before {
     position: relative;
-    left: auto;
     width: 20px;
     height: 20px;
+    left: auto;
     margin-right: 1.56rem;
     border-radius: 20px;
     transform: none;

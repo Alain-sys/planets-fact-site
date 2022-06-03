@@ -6,7 +6,7 @@ const Header = (props) => {
   const currentPlanetName = props.currentPlanet.name;
 
   // add and remove the class active to the .menu and .hamburger classes
-  function navHamburger() {
+  const navHamburger = () => {
     const menuHamburger = document.querySelector('.menu');
     const logoHamburger = document.querySelector('.hamburger');
     const menuHamburgerClasse = menuHamburger.classList;
@@ -22,7 +22,64 @@ const Header = (props) => {
         logoHamburgerClasse.remove('active');
       });
     }
-  }
+  };
+
+  // add animations on main elements when user click on nav buttons
+  const animateMainElements = (index) => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const mainImage = document.querySelector('.image__planet');
+    const mainImageGeology = document.querySelector('.image__geology');
+    const description = document.querySelector('.description');
+    const featuresValue = document.querySelectorAll('.features__value');
+
+    if (props.currentPlanet !== props.dataJson[index]) {
+      if (!mediaQuery || mediaQuery.matches) {
+        return;
+      } else {
+        mainImage.animate(
+          [
+            { transform: 'scale(0.5) translateY(-25%)', opacity: '0' },
+            { transform: 'scale(1) translateY(0%)', opacity: '1' },
+          ],
+          {
+            duration: 500,
+          }
+        );
+
+        description.animate(
+          [
+            { transform: ' translateX(-15%)', opacity: '0' },
+            { transform: ' translateX(0%)', opacity: '1' },
+          ],
+          {
+            duration: 500,
+          }
+        );
+
+        featuresValue.forEach((element) => {
+          element.animate([{ opacity: '0' }, { opacity: '1' }], {
+            duration: 1000,
+          });
+        });
+
+        if (mainImageGeology) {
+          mainImageGeology.animate(
+            [
+              { transform: 'scale(0.5) translateY(-100%)', timing: 'ease-in-out', opacity: '0' },
+              { transform: 'scale(1) translateY(0%)', opacity: '1' },
+            ],
+            {
+              duration: 500,
+            }
+          );
+        } else {
+          return;
+        }
+      }
+    } else {
+      return;
+    }
+  };
 
   // return a button for each planet in the dataJson, when a button is clicked send it's index at the function handleChangePlanets in the App.js component
   const rows = props.dataJson.map((planet, index) => {
@@ -34,6 +91,7 @@ const Header = (props) => {
         key={index}
         onClick={() => {
           props.handleChangePlanets(index);
+          animateMainElements(index);
         }}>
         {planet.name}
         <img className="menu__images" src={chevron} alt="chevron icon" />
