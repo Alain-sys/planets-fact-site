@@ -196,14 +196,14 @@ main {
   background: var(--bg-neptune);
 }
 
-@media (width < 80em) {
+@media (max-width: 1279px) {
   main {
     width: 95%;
   }
 }
 
 /***** Tablet *****/
-@media (width <= 70em) {
+@media (max-width: 1120px) {
   main {
     width: 90%;
     display: flex;
@@ -252,14 +252,14 @@ main {
   }
 }
 
-@media (width <= 48rem) {
+@media (max-width: 768px) {
   .description__text {
     min-height: 140px;
   }
 }
 
 /***** Mobile *****/
-@media (width < 48rem) {
+@media (max-width: 767px) {
   main {
     position: relative;
     width: 100%;

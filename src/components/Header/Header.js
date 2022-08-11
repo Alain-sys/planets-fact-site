@@ -1,3 +1,4 @@
+import React from 'react';
 import './Header.css';
 import hamburger from '../../assets/icon-hamburger.svg';
 import chevron from '../../assets/icon-chevron.svg';

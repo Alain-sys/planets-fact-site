@@ -33,7 +33,7 @@ footer {
   letter-spacing: var(--ls-footer-value);
 }
 
-@media (width < 80em) {
+@media (max-width: 1279px) {
   footer {
     width: 95%;
     margin-bottom: 2.25rem;
@@ -41,7 +41,7 @@ footer {
 }
 
 /*****Tablet*****/
-@media (width <= 70em) {
+@media (max-width: 1120px) {
   footer {
     width: 90%;
   }
@@ -52,7 +52,7 @@ footer {
 }
 
 /*****Mobile*****/
-@media (width < 48em) {
+@media (max-width: 767px) {
   footer {
     width: 100%;
     grid-template: repeat(4, 1fr) / 1fr;

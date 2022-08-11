@@ -103,7 +103,7 @@ header {
 }
 
 /*****Tablet*****/
-@media (48em <= width <= 70em) {
+@media (min-width: 768px) and (max-width: 1120px) {
   header {
     flex-direction: column;
     padding: 0;
@@ -129,7 +129,7 @@ header {
 }
 
 /*****Mobile*****/
-@media (width < 48em) {
+@media (max-width: 767px) {
   body {
     position: relative;
   }

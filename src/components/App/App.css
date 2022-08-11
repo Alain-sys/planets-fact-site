@@ -59,7 +59,7 @@ body button {
   color: #ffffff;
 }
 
-@media (width < 70em) {
+@media (max-width: 1120px) {
   :root {
     --fs-footer-text: 0.5rem;
     --fs-footer-value: 1.5rem;
@@ -70,25 +70,21 @@ body button {
   }
 }
 
-@media (width <= 48em) {
+@media (max-width: 767px) {
   :root {
     --fs-main-title: 3rem;
     --fs-main-text: 0.6875rem;
     --fs-main-buttons: 0.5625rem;
+    --fs-header-nav: 0.9875rem;
+
     --lh-main-title: 3.875rem;
     --lh-text: 1.375rem;
     --ls-main-buttons: 0.12rem;
-  }
-}
-
-@media (width < 48em) {
-  :root {
-    --fs-header-nav: 0.9875rem;
     --ls-header-nav: 0.085rem;
   }
 }
 
-@media (width < 25em) {
+@media (max-width: 400px) {
   :root {
     --fs-main-title: 2.5rem;
     --lh-main-title: 3.235rem;
