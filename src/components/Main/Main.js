@@ -25,44 +25,44 @@ const useMediaQuery = (query) => {
   return matches;
 };
 
-const Images = (props) => {
+const Images = ({ dataJson, button }) => {
   // take the property "image" in the buttonState
-  const imageName = props.button.image;
+  const imageName = button.image;
   return (
     <div className="image">
       {/*if the string of the property image is "geology" return the planet image and its geology image */}
-      {props.button.image === 'geology' ? (
+      {button.image === 'geology' ? (
         <>
           <img
-            className={`image__planet image__planet-${props.content.name.toLowerCase()}`}
-            src={process.env.PUBLIC_URL + props.content.images.planet}
-            alt={props.content.name}
+            className={`image__planet image__planet-${dataJson.name.toLowerCase()}`}
+            src={process.env.PUBLIC_URL + dataJson.images.planet}
+            alt={dataJson.name}
           />
-          <img className="image__geology" src={process.env.PUBLIC_URL + props.content.images[imageName]} alt={props.content.name} />
+          <img className="image__geology" src={process.env.PUBLIC_URL + dataJson.images[imageName]} alt={dataJson.name} />
         </>
       ) : (
         // else return the planet image only
         <img
-          className={`image__planet image__planet-${props.content.name.toLowerCase()}`}
-          src={process.env.PUBLIC_URL + props.content.images[imageName]}
-          alt={props.content.name}
+          className={`image__planet image__planet-${dataJson.name.toLowerCase()}`}
+          src={process.env.PUBLIC_URL + dataJson.images[imageName]}
+          alt={dataJson.name}
         />
       )}
     </div>
   );
 };
 
-const Description = (props) => {
-  const buttonCategory = props.button.category;
+const Description = ({ dataJson, button }) => {
+  const buttonCategory = button.category;
   // return the description of the planet
   return (
-    <div className={`description description-${props.content.name.toLowerCase()}`}>
-      <h2 className="description__title">{props.content.name}</h2>
+    <div className={`description description-${dataJson.name.toLowerCase()}`}>
+      <h2 className="description__title">{dataJson.name}</h2>
       {/* return the text of the planet in relation to the clicked button which is stored in the state */}
-      <p className="description__text">{props.content[buttonCategory].content}</p>
+      <p className="description__text">{dataJson[buttonCategory].content}</p>
       <div className="description__source">
         <p>Source :</p>
-        <a className="description__link" href={props.content[buttonCategory].source}>
+        <a className="description__link" href={dataJson[buttonCategory].source}>
           <p>Wikipedia</p>
           <img src={icon} alt="link for more informations" />
         </a>
@@ -71,9 +71,9 @@ const Description = (props) => {
   );
 };
 
-const Button = (props) => {
+const Button = ({ buttonsTab, buttonCategories, content, buttonState }) => {
   const mediaQueryButton = useMediaQuery('(max-width: 767px)');
-  const buttonStateName = props.buttonState.category;
+  const buttonStateName = buttonState.category;
 
   // add animations on main elements when user click on main buttons
   const animateMainElements = (buttonCategory) => {
@@ -92,22 +92,22 @@ const Button = (props) => {
     }
   };
   // map the array buttonsTab for return three buttons with an unique key
-  const rows = props.buttonsTab.map((buttonCategory, index) => {
+  const rows = buttonsTab.map((buttonCategory, index) => {
     return (
       <button
         type="button"
-        className={`categories__buttons categories__buttons-${props.content.name.toLowerCase()} ${
+        className={`categories__buttons categories__buttons-${content.name.toLowerCase()} ${
           buttonStateName === buttonCategory.category ? 'active' : 'inactive'
         }`}
         key={index}
         // call the function buttonCategory for send the clicked button and its key
         onClick={() => {
-          props.buttonCategory(buttonCategory);
+          buttonCategories(buttonCategory);
           animateMainElements(buttonCategory);
         }}>
         {mediaQueryButton ? buttonCategory.textMobile : buttonCategory.text}
         <span
-          className={`categories__styled-buttons categories__styled-buttons-${props.content.name.toLowerCase()} ${
+          className={`categories__styled-buttons categories__styled-buttons-${content.name.toLowerCase()} ${
             buttonStateName === buttonCategory.category ? 'active' : 'inactive'
           }`}></span>
       </button>
@@ -117,9 +117,8 @@ const Button = (props) => {
   return <div className="categories">{rows}</div>;
 };
 
-const Main = (props) => {
+const Main = ({ dataJson }) => {
   const mediaQueryButton = useMediaQuery('(max-width: 767px)');
-  const content = props.dataJson;
   // array which have the necessary informations for create the buttons in the component Button
   const buttonsTab = [
     { text: 'overview', textMobile: 'overview', category: 'overview', image: 'planet' },
@@ -144,22 +143,22 @@ const Main = (props) => {
   if (mediaQueryButton) {
     return (
       <main>
-        <Button buttonsTab={buttonsTab} buttonCategory={buttonCategory} content={content} buttonState={buttonState} />
-        <Images content={content} button={buttonState} />
+        <Button buttonsTab={buttonsTab} buttonCategories={buttonCategory} content={dataJson} buttonState={buttonState} />
+        <Images dataJson={dataJson} button={buttonState} />
 
         <div className="content">
-          <Description content={content} button={buttonState} />
+          <Description dataJson={dataJson} button={buttonState} />
         </div>
       </main>
     );
   } else {
     return (
       <main>
-        <Images content={content} button={buttonState} />
+        <Images dataJson={dataJson} button={buttonState} />
 
         <div className="content">
-          <Description content={content} button={buttonState} />
-          <Button buttonsTab={buttonsTab} buttonCategory={buttonCategory} content={content} buttonState={buttonState} />
+          <Description dataJson={dataJson} button={buttonState} />
+          <Button buttonsTab={buttonsTab} buttonCategories={buttonCategory} content={dataJson} buttonState={buttonState} />
         </div>
       </main>
     );

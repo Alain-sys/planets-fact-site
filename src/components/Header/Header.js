@@ -3,9 +3,7 @@ import './Header.css';
 import hamburger from '../../assets/icon-hamburger.svg';
 import chevron from '../../assets/icon-chevron.svg';
 
-const Header = (props) => {
-  const currentPlanetName = props.currentPlanet.name;
-
+const Header = ({ dataJson, handleChangePlanets, currentPlanet }) => {
   // add and remove the class active to the .menu and .hamburger classes
   const navHamburger = () => {
     const menuHamburger = document.querySelector('.menu');
@@ -33,7 +31,7 @@ const Header = (props) => {
     const description = document.querySelector('.description');
     const featuresValue = document.querySelectorAll('.features__value');
 
-    if (props.currentPlanet !== props.dataJson[index]) {
+    if (currentPlanet !== dataJson[index]) {
       if (!mediaQuery || mediaQuery.matches) {
         return;
       } else {
@@ -83,15 +81,15 @@ const Header = (props) => {
   };
 
   // return a button for each planet in the dataJson, when a button is clicked send it's index at the function handleChangePlanets in the App.js component
-  const rows = props.dataJson.map((planet, index) => {
+  const rows = dataJson.map((planet, index) => {
     return (
       <button
         type="button"
         // eslint-disable-next-line no-useless-concat
-        className={`menu__items   menu__items-${planet.name.toLowerCase()} ${currentPlanetName === planet.name ? 'active' : 'inactive'}`}
+        className={`menu__items   menu__items-${planet.name.toLowerCase()} ${currentPlanet.name === planet.name ? 'active' : 'inactive'}`}
         key={index}
         onClick={() => {
-          props.handleChangePlanets(index);
+          handleChangePlanets(index);
           animateMainElements(index);
         }}>
         {planet.name}
