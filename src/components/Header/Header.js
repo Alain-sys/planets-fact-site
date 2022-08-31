@@ -1,9 +1,12 @@
 import React from 'react';
+import { useRef } from 'react';
 import './Header.css';
 import hamburger from '../../assets/icon-hamburger.svg';
 import chevron from '../../assets/icon-chevron.svg';
 
-const Header = ({ dataJson, handleChangePlanets, currentPlanet }) => {
+const Header = ({ dataJson, handleChangePlanets, currentPlanet, mainImageRef, mainImageGeologyRef, descriptionRef, featuresValueRef }) => {
+  const menuHamburgerRef = useRef(null);
+  const logoHamburgerRef = useRef(null);
   // add and remove the class active to the .menu and .hamburger classes
   const navHamburger = () => {
     const menuHamburger = document.querySelector('.menu');
@@ -26,26 +29,24 @@ const Header = ({ dataJson, handleChangePlanets, currentPlanet }) => {
   // add animations on main elements when user click on nav buttons
   const animateMainElements = (index) => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const mainImage = document.querySelector('.image__planet');
-    const mainImageGeology = document.querySelector('.image__geology');
-    const description = document.querySelector('.description');
-    const featuresValue = document.querySelectorAll('.features__value');
 
     if (currentPlanet !== dataJson[index]) {
       if (!mediaQuery || mediaQuery.matches) {
         return;
       } else {
-        mainImage.animate(
-          [
-            { transform: 'scale(0.5) translateY(-25%)', opacity: '0' },
-            { transform: 'scale(1) translateY(0%)', opacity: '1' },
-          ],
-          {
-            duration: 500,
-          }
-        );
+        if (mainImageRef.current !== null) {
+          mainImageRef.current.animate(
+            [
+              { transform: 'scale(0.5) translateY(-25%)', opacity: '0' },
+              { transform: 'scale(1) translateY(0%)', opacity: '1' },
+            ],
+            {
+              duration: 500,
+            }
+          );
+        }
 
-        description.animate(
+        descriptionRef.current.animate(
           [
             { transform: ' translateX(-15%)', opacity: '0' },
             { transform: ' translateX(0%)', opacity: '1' },
@@ -55,14 +56,13 @@ const Header = ({ dataJson, handleChangePlanets, currentPlanet }) => {
           }
         );
 
-        featuresValue.forEach((element) => {
+        featuresValueRef.current.forEach((element) => {
           element.animate([{ opacity: '0' }, { opacity: '1' }], {
             duration: 1000,
           });
         });
-
-        if (mainImageGeology) {
-          mainImageGeology.animate(
+        if (mainImageGeologyRef.current !== null) {
+          mainImageGeologyRef.current.animate(
             [
               { transform: 'scale(0.5) translateY(-100%)', timing: 'ease-in-out', opacity: '0' },
               { transform: 'scale(1) translateY(0%)', opacity: '1' },
@@ -101,8 +101,10 @@ const Header = ({ dataJson, handleChangePlanets, currentPlanet }) => {
   return (
     <header>
       <h1 className="logo">The planets</h1>
-      <nav className="menu">{rows}</nav>
-      <img className="hamburger" src={hamburger} alt="menu hamburger" onClick={navHamburger} />
+      <nav ref={menuHamburgerRef} className="menu">
+        {rows}
+      </nav>
+      <img ref={logoHamburgerRef} className="hamburger" src={hamburger} alt="menu hamburger" onClick={navHamburger} />
     </header>
   );
 };
