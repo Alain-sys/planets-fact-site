@@ -54,14 +54,14 @@ const Images = ({ dataJson, button, mainImageRef, mainImageGeologyRef }) => {
   );
 };
 
-const Description = ({ dataJson, button, descriptionRef }) => {
+const Description = ({ dataJson, button, descriptionRef, descriptionTextRef }) => {
   const buttonCategory = button.category;
   // return the description of the planet
   return (
-    <div className={`description description-${dataJson.name.toLowerCase()}`}>
+    <div ref={descriptionRef} className={`description description-${dataJson.name.toLowerCase()}`}>
       <h2 className="description__title">{dataJson.name}</h2>
       {/* return the text of the planet in relation to the clicked button which is stored in the state */}
-      <p ref={descriptionRef} className="description__text">
+      <p ref={descriptionTextRef} className="description__text">
         {dataJson[buttonCategory].content}
       </p>
       <div className="description__source">
@@ -75,7 +75,7 @@ const Description = ({ dataJson, button, descriptionRef }) => {
   );
 };
 
-const Button = ({ buttonsTab, buttonCategories, content, buttonState, mainImageRef, descriptionRef }) => {
+const Button = ({ buttonsTab, buttonCategories, content, buttonState, mainImageRef, descriptionTextRef }) => {
   const mediaQueryButton = useMediaQuery('(max-width: 767px)');
   const buttonStateName = buttonState.category;
 
@@ -88,7 +88,7 @@ const Button = ({ buttonsTab, buttonCategories, content, buttonState, mainImageR
         });
       }
 
-      descriptionRef.current.animate([{ opacity: '0' }, { opacity: '1' }], {
+      descriptionTextRef.current.animate([{ opacity: '0' }, { opacity: '1' }], {
         duration: 1000,
       });
     } else {
@@ -121,7 +121,7 @@ const Button = ({ buttonsTab, buttonCategories, content, buttonState, mainImageR
   return <div className="categories">{rows}</div>;
 };
 
-const Main = ({ dataJson, mainImageRef, mainImageGeologyRef, descriptionRef }) => {
+const Main = ({ dataJson, mainImageRef, mainImageGeologyRef, descriptionRef, descriptionTextRef }) => {
   const mediaQueryButton = useMediaQuery('(max-width: 767px)');
   // array which have the necessary informations for create the buttons in the component Button
   const buttonsTab = [
@@ -153,12 +153,12 @@ const Main = ({ dataJson, mainImageRef, mainImageGeologyRef, descriptionRef }) =
           content={dataJson}
           buttonState={buttonState}
           mainImageRef={mainImageRef}
-          descriptionRef={descriptionRef}
+          descriptionTextRef={descriptionTextRef}
         />
         <Images dataJson={dataJson} button={buttonState} mainImageRef={mainImageRef} mainImageGeologyRef={mainImageGeologyRef} />
 
         <div className="content">
-          <Description dataJson={dataJson} button={buttonState} descriptionRef={descriptionRef} />
+          <Description dataJson={dataJson} button={buttonState} descriptionRef={descriptionRef} descriptionTextRef={descriptionTextRef} />
         </div>
       </main>
     );
@@ -168,14 +168,14 @@ const Main = ({ dataJson, mainImageRef, mainImageGeologyRef, descriptionRef }) =
         <Images dataJson={dataJson} button={buttonState} mainImageRef={mainImageRef} mainImageGeologyRef={mainImageGeologyRef} />
 
         <div className="content">
-          <Description dataJson={dataJson} button={buttonState} descriptionRef={descriptionRef} />
+          <Description dataJson={dataJson} button={buttonState} descriptionRef={descriptionRef} descriptionTextRef={descriptionTextRef} />
           <Button
             buttonsTab={buttonsTab}
             buttonCategories={buttonCategory}
             content={dataJson}
             buttonState={buttonState}
             mainImageRef={mainImageRef}
-            descriptionRef={descriptionRef}
+            descriptionTextRef={descriptionTextRef}
           />
         </div>
       </main>

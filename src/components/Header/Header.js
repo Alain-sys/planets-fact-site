@@ -4,24 +4,31 @@ import './Header.css';
 import hamburger from '../../assets/icon-hamburger.svg';
 import chevron from '../../assets/icon-chevron.svg';
 
-const Header = ({ dataJson, handleChangePlanets, currentPlanet, mainImageRef, mainImageGeologyRef, descriptionRef, featuresValueRef }) => {
+const Header = ({
+  dataJson,
+  handleChangePlanets,
+  currentPlanet,
+  mainImageRef,
+  mainImageGeologyRef,
+  descriptionRef,
+  featuresValueRef,
+  menuItemsRef,
+}) => {
   const menuHamburgerRef = useRef(null);
   const logoHamburgerRef = useRef(null);
+
   // add and remove the class active to the .menu and .hamburger classes
   const navHamburger = () => {
-    const menuHamburger = document.querySelector('.menu');
-    const logoHamburger = document.querySelector('.hamburger');
-    const menuHamburgerClasse = menuHamburger.classList;
-    const logoHamburgerClasse = logoHamburger.classList;
-    menuHamburgerClasse.toggle('active');
-    logoHamburgerClasse.toggle('active');
+    const menuHamburgerClass = menuHamburgerRef.current.classList;
+    const logoHamburgerClass = logoHamburgerRef.current.classList;
+    menuHamburgerClass.toggle('active');
+    logoHamburgerClass.toggle('active');
 
     // remove .active class when a nav button is clicked
-    const menuItems = document.querySelectorAll('.menu__items');
-    for (let i = 0; i < menuItems.length; i++) {
-      menuItems[i].addEventListener('click', () => {
-        menuHamburgerClasse.remove('active');
-        logoHamburgerClasse.remove('active');
+    for (let i = 0; i < menuItemsRef.current.length; i++) {
+      menuItemsRef.current[i].addEventListener('click', () => {
+        menuHamburgerClass.remove('active');
+        logoHamburgerClass.remove('active');
       });
     }
   };
@@ -45,16 +52,17 @@ const Header = ({ dataJson, handleChangePlanets, currentPlanet, mainImageRef, ma
             }
           );
         }
-
-        descriptionRef.current.animate(
-          [
-            { transform: ' translateX(-15%)', opacity: '0' },
-            { transform: ' translateX(0%)', opacity: '1' },
-          ],
-          {
-            duration: 500,
-          }
-        );
+        if (descriptionRef.current !== null) {
+          descriptionRef.current.animate(
+            [
+              { transform: ' translateX(-15%)', opacity: '0' },
+              { transform: ' translateX(0%)', opacity: '1' },
+            ],
+            {
+              duration: 500,
+            }
+          );
+        }
 
         featuresValueRef.current.forEach((element) => {
           element.animate([{ opacity: '0' }, { opacity: '1' }], {
@@ -84,6 +92,7 @@ const Header = ({ dataJson, handleChangePlanets, currentPlanet, mainImageRef, ma
   const rows = dataJson.map((planet, index) => {
     return (
       <button
+        ref={(el) => (menuItemsRef.current[index] = el)}
         type="button"
         // eslint-disable-next-line no-useless-concat
         className={`menu__items   menu__items-${planet.name.toLowerCase()} ${currentPlanet.name === planet.name ? 'active' : 'inactive'}`}
